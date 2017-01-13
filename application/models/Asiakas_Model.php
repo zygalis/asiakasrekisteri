@@ -10,4 +10,9 @@ class Asiakas_model extends CI_Model {
         $query = $this->db->get('asiakas');
         return $query->result();
     }
+    public function lisaa($data){
+        $this->db->insert('asiakas',$data);
+        return $this->db->insert_id();  
+    }
+    
 }

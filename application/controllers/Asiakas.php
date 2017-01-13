@@ -7,9 +7,26 @@ class Asiakas extends CI_Controller {
             $this->load->model('asiakas_model');
         }
 
-	public function index()
-	{
+	public function index() {
             $data['asiakkaat'] = $this->asiakas_model->hae_kaikki();
-            $this->load->view('asiakkaat_view', $data);
+            $data['main_content'] = 'asiakkaat_view';
+            $this->load->view('template', $data);
 	}
+        public function lisaa() {
+            
+            $data['main_content'] = 'asiakas_view';
+            $this->load->view('template',$data);
+            
+        }
+        public function tallenna(){
+            $data = array(
+                'etunimi' => $this->input->post('etunimi'),
+                'sukunimi' => $this->input->post('sukunimi'),
+                'osoite' => $this->input->post('osoite'),
+                'postitmp' => $this->input->post('postitmp'),
+                'postinro' => $this->input->post('postinro')
+            );
+            $this->asiakas_model->lisaa($data);
+            redirect('asiakas/index');
+    }
 }
