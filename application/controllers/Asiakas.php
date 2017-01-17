@@ -13,6 +13,14 @@ class Asiakas extends CI_Controller {
             $this->load->view('template', $data);
 	}
         public function lisaa() {
+            $data = array(
+              'id'          =>      '',
+              'etunimi'     =>      '',
+              'sukunimi'    =>      '',
+              'osoite'      =>      '',
+              'postitmp'    =>      '',
+              'postinro'    =>      ''
+            );
             
             $data['main_content'] = 'asiakas_view';
             $this->load->view('template',$data);
@@ -20,14 +28,40 @@ class Asiakas extends CI_Controller {
         }
         public function tallenna(){
             $data = array(
-                'etunimi' => $this->input->post('etunimi'),
-                'sukunimi' => $this->input->post('sukunimi'),
-                'osoite' => $this->input->post('osoite'),
-                'postitmp' => $this->input->post('postitmp'),
-                'postinro' => $this->input->post('postinro')
+                'id'        =>  $this->input->post('id'),
+                'etunimi'   =>  $this->input->post('etunimi'),
+                'sukunimi'  =>  $this->input->post('sukunimi'),
+                'osoite'    =>  $this->input->post('osoite'),
+                'postitmp'  =>  $this->input->post('postitmp'),
+                'postinro'  =>  $this->input->post('postinro')
             );
-            $this->asiakas_model->lisaa($data);
+            if(strlen($this->input->post('id')) === 0){
+                $this->asiakas_model->lisaa($data);
+            }
+            else{
+                $this->asiakas_model->muokkaa($data);
+            }
             redirect('asiakas/index');
+        }
+        public function muokkaa($id){
+            $asiakas = $this->asiakas_model->hae($id);
+            
+            if(isset($asiakas)){
+                $data = array(
+                    'id'          =>      $asiakas->id,
+                    'etunimi'     =>      $asiakas->etunimi,
+                    'sukunimi'    =>      $asiakas->sukunimi,
+                    'osoite'      =>      $asiakas->osoite,
+                    'postitmp'    =>      $asiakas->postitmp,
+                    'postinro'    =>      $asiakas->postinro
+                );
+            
+                $data['main_content'] = 'asiakas_view';
+                $this->load->view('template',$data);          
+            }
+            else{
+                throw new Exception('Asiakasta ei löydy!');
+            }
         }
         public function poista($id){
             $this->asiakas_model->poista(intval($id));
