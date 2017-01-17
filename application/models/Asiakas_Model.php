@@ -14,5 +14,14 @@ class Asiakas_model extends CI_Model {
         $this->db->insert('asiakas',$data);
         return $this->db->insert_id();  
     }
+    public function muokkaa($data){
+        $this->db->where('id', $data['id']);
+        $this->db->update('asiakas,$data');
+    }
+    public function poista($id){
+        // DELETE FROM asiakas WHERE id = $id
+        $this->db->where('id',$id);
+        $this->db->delete('asiakas');
+    }
     
 }

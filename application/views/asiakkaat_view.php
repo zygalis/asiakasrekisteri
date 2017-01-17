@@ -9,6 +9,7 @@
                 print '<th>Lähiosoite</th>';
                 print '<th>Postitoimipaikka</th>';
                 print '<th>Postinumero</th>';
+                print '<th></th>';
                 print '</tr>';
         foreach ($asiakkaat as $asiakas){
                 print "<tr>";
@@ -18,6 +19,7 @@
                 print "<td>$asiakas->osoite</td>";
                 print "<td>$asiakas->postitmp</td>";
                 print "<td>$asiakas->postinro</td>";
+                print "<td>" . anchor("asiakas/poista/$asiakas->id","Poista") . "</td>";
                 print "</tr>"; 
         }
         print '</table>';

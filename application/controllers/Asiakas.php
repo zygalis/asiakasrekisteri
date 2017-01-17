@@ -28,5 +28,10 @@ class Asiakas extends CI_Controller {
             );
             $this->asiakas_model->lisaa($data);
             redirect('asiakas/index');
-    }
+        }
+        public function poista($id){
+            $this->asiakas_model->poista(intval($id));
+//            $this->index();
+            redirect('asiakas/index');
+        }
 }
