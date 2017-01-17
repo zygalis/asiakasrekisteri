@@ -5,6 +5,7 @@ class Asiakas extends CI_Controller {
         public function __construct() {
             parent::__construct();
             $this->load->model('asiakas_model');
+            $this->load->library('form_validation');
         }
 
 	public function index() {
@@ -35,13 +36,25 @@ class Asiakas extends CI_Controller {
                 'postitmp'  =>  $this->input->post('postitmp'),
                 'postinro'  =>  $this->input->post('postinro')
             );
-            if(strlen($this->input->post('id')) === 0){
-                $this->asiakas_model->lisaa($data);
+            
+            $this->form_validation->set_rules('etunimi','etunimi', 'required');
+            $this->form_validation->set_rules('sukunimi','sukunimi', 'required');
+            
+            if($this->form_validation->run() === TRUE){
+                if(strlen($this->input->post('id')) === 0){
+                    $this->asiakas_model->lisaa($data);
+                }
+                else{
+                    $this->asiakas_model->muokkaa($data);
+                }
+                redirect('asiakas/index');
             }
             else{
-                $this->asiakas_model->muokkaa($data);
+                $data['main_content'] = 'asiakas_view';
+                $this->load->view('template',$data);
             }
-            redirect('asiakas/index');
+                    
+            
         }
         public function muokkaa($id){
             $asiakas = $this->asiakas_model->hae($id);

@@ -1,13 +1,15 @@
-
+<?php
+print validation_errors("<p style='color:red'>","</p>");
+?>
         <h3>Lisää asiakas</h3>
         <form action="<?php print site_url() . '/asiakas/tallenna';?>" method="post">
             <input type="hidden" name="id" value="<?php print $id?>">
             <div class="form-group">
-                <label>Etunimi</label>
+                <label>Etunimi</label><?php echo form_error('etunimi');?>
                 <input name="etunimi" class="form-control" value="<?php print $etunimi?>">
             </div>
             <div class="form-group">
-                <label>Sukunimi</label>
+                <label>Sukunimi</label><?php echo form_error('sukunimi');?>
                 <input name="sukunimi" class="form-control" value="<?php print $sukunimi?>">
             </div>
             <div class="form-group">
