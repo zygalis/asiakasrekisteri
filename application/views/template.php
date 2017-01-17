@@ -12,8 +12,9 @@ and open the template in the editor.
         <link href="<?php print base_url() . 'css/style.css';?>" rel="stylesheet">
     </head>
     <body>
-        <h1>Asiakasrekisteri</h1>
+        
         <div class="container">
+        <h1>Asiakasrekisteri</h1>
         <?php
             $this->load->view($main_content);
         ?>

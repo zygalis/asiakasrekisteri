@@ -1,5 +1,5 @@
 
-<div><h3>Lisää asiakas</h3></div>
+        <h3>Lisää asiakas</h3>
         <form action="<?php print site_url() . '/asiakas/tallenna';?>" method="post">
             <div class="form-group">
                 <label>Etunimi</label>
