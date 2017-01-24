@@ -6,11 +6,11 @@ print validation_errors("<p style='color:red'>","</p>");
         <h3>Rekisteröidy</h3>
         <form role="form" method="post" action="<?php print site_url(). '/kayttaja/rekisteroidy'?>">
              <div class="form-group">
-                <label for="tunnus">Email</label>
+                <label for="tunnus">Email</label><?php echo form_error('email');?>
                 <input type="email" name="email" class="form-control">
             </div>
             <div class="form-group">
-                <label for="salasana">Salasana</label>
+                <label for="salasana">Salasana</label><?php echo form_error('salasana');?>
                 <input name="salasana" type="password" class="form-control">
             </div><div class="form-group">
                 <label for="salasana2">Toista salasana</label>

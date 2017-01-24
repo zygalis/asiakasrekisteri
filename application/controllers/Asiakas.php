@@ -4,8 +4,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Asiakas extends CI_Controller {
         public function __construct() {
             parent::__construct();
+           
+            if(!isset($_SESSION['kayttaja'])){
+                redirect('kayttaja/index');
+            }
             $this->load->model('asiakas_model');
             $this->load->library('form_validation');
+           
         }
 
 	public function index() {
