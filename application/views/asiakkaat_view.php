@@ -10,12 +10,12 @@
         print anchor('asiakas/lisaa', 'Lisää');
         print '<table class="table">';
                 print '<tr>';
-                print '<th>Id</th>';
-                print '<th>Sukunimi</th>';
-                print '<th>Etunimi</th>';
-                print '<th>Lähiosoite</th>';
-                print '<th>Postitoimipaikka</th>';
-                print '<th>Postinumero</th>';
+                print '<th></th>';
+                print '<th>' . anchor("asiakas/index/$sivutuksen_kohta/sukunimi", 'Sukunimi') . '</th>';
+                print '<th>' . anchor("asiakas/index/$sivutuksen_kohta/etunimi", 'Etunimi') . '</th>';
+                print '<th>' . anchor("asiakas/index/$sivutuksen_kohta/osoite", 'Lähiosoite') . '</th>';
+                print '<th>' . anchor("asiakas/index/$sivutuksen_kohta/postitmp", 'Postitoimipaikka') . '</th>';
+                print '<th>' . anchor("asiakas/index/$sivutuksen_kohta/postinro", 'Postinumero') . '</th>';
                 print '<th></th>';
                 print '<th></th>';
                 print '<th></th>';
@@ -34,5 +34,5 @@
                 print "</tr>"; 
         }
         print '</table>';
-        ?>
+        echo $this->pagination->create_links();?>
 

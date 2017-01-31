@@ -21,6 +21,20 @@ create table kayttaja(
     email varchar(100) not null unique,
     salasana varchar(255) not null
 );
+create table muistio(
+    id int primary key auto_increment,
+    tallennettu timestamp default current_timestamp,
+    aika datetime not null,
+    teksti text not null,
+    asiakas_id int not null,
+    index(asiakas_id),
+    foreign key (asiakas_id) references asiakas(id)
+    on delete restrict,
+    kayttaja_id int not null,
+    index(kayttaja_id),
+    foreign key (kayttaja_id) references kayttaja(id)
+    on delete restrict
+);
 
 insert into asiakas(etunimi,sukunimi,osoite,postinro,postitmp) values ('Eerika','Leppänen', 'Hiidentie 2', '90550', 'Oulu');
 insert into asiakas(etunimi,sukunimi) values ('Anni','Kuosku');

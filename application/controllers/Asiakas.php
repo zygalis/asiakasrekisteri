@@ -10,6 +10,7 @@ class Asiakas extends CI_Controller {
             }
             $this->load->model('asiakas_model');
             $this->load->library('form_validation');
+            $this->load->library('pagination');
            
         }
 
@@ -18,7 +19,30 @@ class Asiakas extends CI_Controller {
             $etsi = "";
             $etsi = $this->input->post("search");
             
-            $data['asiakkaat'] = $this->asiakas_model->hae_kaikki($etsi);
+            $asiakkaita_sivulla = 3;
+            $jarjestys = "";
+            
+            if($this->session->userdata("jarjestys")){
+                $jarjestys = $this->session->userdata("jarjestys");
+            }
+            
+            if($this->uri->segment(4)){
+                $jarjestys = $this->uri->segment(4);
+                $this->session->get_userdata("jarjestys", $jarjestys);
+            }
+            $data['asiakkaat'] = $this->asiakas_model->hae_kaikki($etsi, $asiakkaita_sivulla,$this->uri->segment(3),$jarjestys);
+            
+            $data["sivutuksen_kohta"] = 0;
+            
+            if($this->uri->segment(3)){
+                $data["sivutuksen_kohta"] = $this->uri->segment(3);
+            }
+            
+            $config['base_url'] = site_url('asiakas/index');
+            $config['total_rows'] = $this->asiakas_model->laske_asiakkaat();
+            $config['per_page'] = $asiakkaita_sivulla;
+            $config['uri_segment'] = 3;
+            $this->pagination->initialize($config);
             $data['main_content'] = 'asiakkaat_view';
             $this->load->view('template', $data);
 	}
