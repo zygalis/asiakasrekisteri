@@ -6,7 +6,13 @@ class Asiakas_model extends CI_Model {
         parent::__construct();
     }
     
-    public function hae_kaikki(){
+    public function hae_kaikki($etsi = ""){
+        if(strlen($etsi)>0){
+            $this->db->or_like('etunimi', $etsi);
+            $this->db->or_like('sukunimi', $etsi);
+            
+        }
+        
         $query = $this->db->get('asiakas');
         return $query->result();
     }

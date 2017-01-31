@@ -14,7 +14,11 @@ class Asiakas extends CI_Controller {
         }
 
 	public function index() {
-            $data['asiakkaat'] = $this->asiakas_model->hae_kaikki();
+            
+            $etsi = "";
+            $etsi = $this->input->post("search");
+            
+            $data['asiakkaat'] = $this->asiakas_model->hae_kaikki($etsi);
             $data['main_content'] = 'asiakkaat_view';
             $this->load->view('template', $data);
 	}
